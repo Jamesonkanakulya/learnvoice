@@ -93,11 +93,13 @@ export default function StudySessionScreen() {
       const result = await speechService.startListening((partial) => {
         setPartialText(partial);
       });
-      setUserAnswer(result.text);
       setPartialText('');
       setIsListening(false);
       if (result.text) {
+        setUserAnswer(result.text);
         setPhase('answering');
+      } else {
+        Alert.alert('No Speech Detected', `Recognition ended with no text. (confidence: ${result.confidence})\n\nMake sure microphone permission is granted and speak clearly.`);
       }
     } catch (err) {
       setIsListening(false);
