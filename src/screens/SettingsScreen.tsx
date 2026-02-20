@@ -180,7 +180,7 @@ export default function SettingsScreen() {
                 ? 'Not supported in this browser'
                 : 'Not available'
           }
-          left={(props) => <List.Icon {...props} icon="volume-up" />}
+          left={(props) => <List.Icon {...props} icon="volume-high" />}
           right={() => (
             <Switch
               value={voiceSettings.ttsEnabled && speechService.isTTSAvailable}
@@ -200,7 +200,7 @@ export default function SettingsScreen() {
                 ? 'Not supported in this browser'
                 : 'Requires a custom app build'
           }
-          left={(props) => <List.Icon {...props} icon="mic" />}
+          left={(props) => <List.Icon {...props} icon="microphone" />}
           right={() => (
             <Switch
               value={voiceSettings.sttEnabled && speechService.isSTTAvailable}
@@ -230,7 +230,7 @@ export default function SettingsScreen() {
           <List.Item
             title="Auto-Listen After Reading"
             description="Start listening for your answer after question is read"
-            left={(props) => <List.Icon {...props} icon="mic-none" />}
+            left={(props) => <List.Icon {...props} icon="microphone-outline" />}
             right={() => (
               <Switch
                 value={voiceSettings.autoListen}

@@ -286,7 +286,7 @@ export default function StudySessionScreen() {
           {/* Voice Mode Toggle — show if either TTS or STT is enabled */}
           {(ttsOn || sttOn) && (
             <IconButton
-              icon={isVoiceMode ? 'mic' : 'mic-off'}
+              icon={isVoiceMode ? 'microphone' : 'microphone-off'}
               iconColor={isVoiceMode ? theme.colors.primary : theme.colors.onSurfaceVariant}
               size={20}
               onPress={() => {
@@ -382,7 +382,7 @@ export default function StudySessionScreen() {
                     <Button
                       mode="contained"
                       onPress={handleStartListening}
-                      icon="mic"
+                      icon="microphone"
                       style={{ borderRadius: 12, marginTop: 12 }}
                       contentStyle={{ height: 52 }}
                       labelStyle={{ fontSize: 16 }}
