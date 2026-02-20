@@ -83,7 +83,7 @@ export default function StudySessionScreen() {
           handleStartListening();
         }
       });
-  }, [isVoiceMode, currentIndex, phase]);
+  }, [isVoiceMode, currentIndex, phase, questions.length]);
 
   const handleStartListening = async () => {
     if (!sttOn) return;
@@ -406,19 +406,35 @@ export default function StudySessionScreen() {
                 />
               </View>
             ) : (
-              <TextInput
-                label="Your Answer"
-                value={userAnswer}
-                onChangeText={(text) => {
-                  setUserAnswer(text);
-                  if (phase === 'question') setPhase('answering');
-                }}
-                mode="outlined"
-                style={styles.answerInput}
-                multiline
-                placeholder="Type your answer here..."
-                autoFocus
-              />
+              <>
+                <TextInput
+                  label="Your Answer"
+                  value={userAnswer}
+                  onChangeText={(text) => {
+                    setUserAnswer(text);
+                    if (phase === 'question') setPhase('answering');
+                  }}
+                  mode="outlined"
+                  style={styles.answerInput}
+                  multiline
+                  placeholder="Type your answer here..."
+                  autoFocus={!sttOn}
+                  right={sttOn && !isListening
+                    ? <TextInput.Icon icon="microphone" onPress={handleStartListening} />
+                    : sttOn && isListening
+                    ? <TextInput.Icon icon="stop-circle" onPress={handleStopListening} />
+                    : undefined}
+                />
+                {isListening && (
+                  <View style={styles.inlineListening}>
+                    <MaterialIcons name="mic" size={16} color={theme.colors.primary} />
+                    <Text variant="bodySmall" style={{ color: theme.colors.primary, flex: 1 }}>
+                      {partialText || 'Listening — speak your answer...'}
+                    </Text>
+                    <Button compact mode="outlined" onPress={handleStopListening} icon="stop">Stop</Button>
+                  </View>
+                )}
+              </>
             )}
 
             <View style={styles.actionRow}>
@@ -573,4 +589,5 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   feedbackActions: { flexDirection: 'row', gap: 12, marginTop: 8 },
+  inlineListening: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingVertical: 8, paddingHorizontal: 4, marginBottom: 8 },
 });
