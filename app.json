@@ -28,7 +28,14 @@
     },
     "plugins": [
       "expo-secure-store",
-      "expo-sqlite"
+      "expo-sqlite",
+      [
+        "expo-speech-recognition",
+        {
+          "microphonePermission": "Allow LearnVoice to use the microphone for voice answers.",
+          "speechRecognitionPermission": "Allow LearnVoice to use speech recognition for voice answers."
+        }
+      ]
     ]
   }
 }
