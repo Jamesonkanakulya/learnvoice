@@ -176,7 +176,9 @@ export default function SettingsScreen() {
           description={
             speechService.isTTSAvailable
               ? 'Read questions and feedback aloud'
-              : 'Not available in this browser'
+              : Platform.OS === 'web'
+                ? 'Not supported in this browser'
+                : 'Not available'
           }
           left={(props) => <List.Icon {...props} icon="volume-up" />}
           right={() => (
@@ -194,7 +196,9 @@ export default function SettingsScreen() {
           description={
             speechService.isSTTAvailable
               ? 'Speak your answers instead of typing'
-              : 'Not available in this browser'
+              : Platform.OS === 'web'
+                ? 'Not supported in this browser'
+                : 'Requires a custom app build'
           }
           left={(props) => <List.Icon {...props} icon="mic" />}
           right={() => (
