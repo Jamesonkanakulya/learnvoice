@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { View, StyleSheet, KeyboardAvoidingView, Platform, Animated } from 'react-native';
+import { View, StyleSheet, KeyboardAvoidingView, Platform, Animated, Alert } from 'react-native';
 import { Text, Button, TextInput, useTheme, IconButton, ProgressBar, Surface } from 'react-native-paper';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -99,8 +99,10 @@ export default function StudySessionScreen() {
       if (result.text) {
         setPhase('answering');
       }
-    } catch {
+    } catch (err) {
       setIsListening(false);
+      const msg = err instanceof Error ? err.message : String(err);
+      Alert.alert('Voice Error', msg);
     }
   };
 
